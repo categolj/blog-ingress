@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: blog-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: blog-ik-am # gcloud compute addresses create blog-ik-am --global
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - secretName: blog-tls
+  rules:
+  - host: blog.ik.am
+    http:
+      paths:
+      - backend:
+          serviceName: blog-ui-service
+          servicePort: 8080
