@@ -15,3 +15,15 @@ spec:
       - backend:
           serviceName: blog-ui-service
           servicePort: 8080
+  - host: blog-ui-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-ui-service
+          servicePort: 8080
+  - host: blog-point-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-point-service
+          servicePort: 8080
