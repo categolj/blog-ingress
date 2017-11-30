@@ -27,3 +27,9 @@ spec:
       - backend:
           serviceName: blog-point-service
           servicePort: 8080
+  - host: blog-webhook-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-webhook-service
+          servicePort: 8080
