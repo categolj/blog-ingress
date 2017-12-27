@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: blog-ingress
+  namespace: blog
   annotations:
     kubernetes.io/ingress.global-static-ip-name: blog-ik-am # gcloud compute addresses create blog-ik-am --global
     ingress.kubernetes.io/rewrite-target: /
