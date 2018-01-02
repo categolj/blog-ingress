@@ -16,6 +16,18 @@ spec:
       - backend:
           serviceName: blog-ui-service
           servicePort: 8080
+  - host: old.blog.ik.am
+    http:
+      paths:
+      - backend:
+          serviceName: blog-old-ui-service
+          servicePort: 8080
+  - host: beta.blog.ik.am
+    http:
+      paths:
+      - backend:
+          serviceName: blog-ui-service
+          servicePort: 8080
   - host: blog-ui-35-190-30-50.sslip.io
     http:
       paths:
