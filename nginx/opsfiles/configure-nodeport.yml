@@ -1,0 +1,6 @@
+- type: replace
+  path: /spec/ports/name=http/nodePort?
+  value: 32080
+- type: replace
+  path: /spec/ports/name=https/nodePort?
+  value: 32443
