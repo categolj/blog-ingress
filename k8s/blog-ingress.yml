@@ -14,7 +14,13 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: blog-ui-service
+          serviceName: blog-gateway-service
+          servicePort: 8080
+  - host: beta.blog.ik.am
+    http:
+      paths:
+      - backend:
+          serviceName: blog-gateway-service
           servicePort: 8080
   - host: blog-ui-35-190-30-50.sslip.io
     http:
@@ -28,6 +34,12 @@ spec:
       - backend:
           serviceName: blog-api-service
           servicePort: 8080
+  - host: blog-gateway-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-gateway-service
+          servicePort: 8080
   - host: riff-35-190-30-50.sslip.io
     http:
       paths:
@@ -40,6 +52,12 @@ spec:
       - backend:
           serviceName: blog-prometheus
           servicePort: 9090
+  - host: zipkin-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-zipkin-service
+          servicePort: 9411
   - host: note.ik.am
     http:
       paths:
