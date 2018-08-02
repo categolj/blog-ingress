@@ -4,55 +4,55 @@ metadata:
   name: blog-ingress
   namespace: blog
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: blog-ik-am # gcloud compute addresses create blog-ik-am --global
     ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
 spec:
   tls:
-  - secretName: blog-tls
+  - hosts:
+    - blog.ik.am
+    - blog-api.ik.am
+    - gateway.ik.am
+    - riff.ik.am
+    - prometheus.ik.am
+    - zipkin.ik.am
+    - note.ik.am
+    # wget https://raw.githubusercontent.com/aws-quickstart/quickstart-pivotal-cloudfoundry/master/scripts/gen_ssl_certs.sh
+    # chmod +x gen_ssl_certs.sh 
+    # ./gen_ssl_certs.sh ik.am
+    # kubectl create secret -n blog tls ik-am-tls --cert=ik.am.crt --key=ik.am.key
+    secretName: ik-am-tls
   rules:
   - host: blog.ik.am
     http:
       paths:
       - backend:
-          serviceName: blog-gateway-service
-          servicePort: 8080
-  - host: beta.blog.ik.am
-    http:
-      paths:
-      - backend:
-          serviceName: blog-gateway-service
-          servicePort: 8080
-  - host: blog-ui-35-190-30-50.sslip.io
-    http:
-      paths:
-      - backend:
           serviceName: blog-ui-service
           servicePort: 8080
-  - host: blog-api-35-190-30-50.sslip.io
+  - host: blog-api.ik.am
     http:
       paths:
       - backend:
           serviceName: blog-api-service
           servicePort: 8080
-  - host: blog-gateway-35-190-30-50.sslip.io
+  - host: gateway.ik.am
     http:
       paths:
       - backend:
           serviceName: blog-gateway-service
           servicePort: 8080
-  - host: riff-35-190-30-50.sslip.io
+  - host: riff.ik.am
     http:
       paths:
       - backend:
           serviceName: blog-riff-http-gateway
           servicePort: 80
-  - host: prometheus-35-190-30-50.sslip.io
+  - host: prometheus.ik.am
     http:
       paths:
       - backend:
           serviceName: blog-prometheus
           servicePort: 9090
-  - host: zipkin-35-190-30-50.sslip.io
+  - host: zipkin.ik.am
     http:
       paths:
       - backend:

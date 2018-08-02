@@ -1,0 +1,66 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: blog-ingress
+  namespace: blog
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: blog-ik-am # gcloud compute addresses create blog-ik-am --global
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - secretName: blog-tls
+  rules:
+  - host: blog.ik.am
+    http:
+      paths:
+      - backend:
+          serviceName: blog-ui-service
+          servicePort: 8080
+  - host: beta.blog.ik.am
+    http:
+      paths:
+      - backend:
+          serviceName: blog-gateway-service
+          servicePort: 8080
+  - host: blog-ui-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-ui-service
+          servicePort: 8080
+  - host: blog-api-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-api-service
+          servicePort: 8080
+  - host: blog-gateway-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-gateway-service
+          servicePort: 8080
+  - host: riff-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-riff-http-gateway
+          servicePort: 80
+  - host: prometheus-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-prometheus
+          servicePort: 9090
+  - host: zipkin-35-190-30-50.sslip.io
+    http:
+      paths:
+      - backend:
+          serviceName: blog-zipkin-service
+          servicePort: 9411
+  - host: note.ik.am
+    http:
+      paths:
+      - backend:
+          serviceName: cms-service
+          servicePort: 8080

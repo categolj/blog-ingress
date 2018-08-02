@@ -1,0 +1,66 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: blog-ingress
+  namespace: blog-dev
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+  - hosts:
+    - blog.k8s.bosh.tokyo
+    - blog-api.k8s.bosh.tokyo
+    - gateway.k8s.bosh.tokyo
+    - riff.k8s.bosh.tokyo
+    - prometheus.k8s.bosh.tokyo
+    - zipkin.k8s.bosh.tokyo
+    - note.k8s.bosh.tokyo
+    # wget https://raw.githubusercontent.com/aws-quickstart/quickstart-pivotal-cloudfoundry/master/scripts/gen_ssl_certs.sh
+    # chmod +x gen_ssl_certs.sh 
+    # ./gen_ssl_certs.sh k8s.bosh.tokyo
+    # kubectl create secret -n blog tls k8s-bosh-tokyo-tls --cert=k8s.bosh.tokyo.crt --key=k8s.bosh.tokyo.key
+    secretName: k8s-bosh-tokyo-tls
+  rules:
+  - host: blog.k8s.bosh.tokyo
+    http:
+      paths:
+      - backend:
+          serviceName: blog-ui-service
+          servicePort: 8080
+  - host: blog-api.k8s.bosh.tokyo
+    http:
+      paths:
+      - backend:
+          serviceName: blog-api-service
+          servicePort: 8080
+  - host: gateway.k8s.bosh.tokyo
+    http:
+      paths:
+      - backend:
+          serviceName: blog-gateway-service
+          servicePort: 8080
+  - host: riff.k8s.bosh.tokyo
+    http:
+      paths:
+      - backend:
+          serviceName: blog-riff-http-gateway
+          servicePort: 80
+  - host: prometheus.k8s.bosh.tokyo
+    http:
+      paths:
+      - backend:
+          serviceName: blog-prometheus
+          servicePort: 9090
+  - host: zipkin.k8s.bosh.tokyo
+    http:
+      paths:
+      - backend:
+          serviceName: blog-zipkin-service
+          servicePort: 9411
+  - host: note.k8s.bosh.tokyo
+    http:
+      paths:
+      - backend:
+          serviceName: cms-service
+          servicePort: 8080
