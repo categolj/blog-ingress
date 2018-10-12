@@ -11,11 +11,7 @@ spec:
   - hosts:
     - blog.k8s.bosh.tokyo
     - blog-api.k8s.bosh.tokyo
-    - gateway.k8s.bosh.tokyo
-    - riff.k8s.bosh.tokyo
-    - prometheus.k8s.bosh.tokyo
-    - zipkin.k8s.bosh.tokyo
-    - note.k8s.bosh.tokyo
+#    - note.k8s.bosh.tokyo
     # wget https://raw.githubusercontent.com/aws-quickstart/quickstart-pivotal-cloudfoundry/master/scripts/gen_ssl_certs.sh
     # chmod +x gen_ssl_certs.sh 
     # ./gen_ssl_certs.sh k8s.bosh.tokyo
@@ -34,33 +30,9 @@ spec:
       - backend:
           serviceName: blog-api-service
           servicePort: 8080
-  - host: gateway.k8s.bosh.tokyo
-    http:
-      paths:
-      - backend:
-          serviceName: blog-gateway-service
-          servicePort: 8080
-  - host: riff.k8s.bosh.tokyo
-    http:
-      paths:
-      - backend:
-          serviceName: blog-riff-http-gateway
-          servicePort: 80
-  - host: prometheus.k8s.bosh.tokyo
-    http:
-      paths:
-      - backend:
-          serviceName: blog-prometheus
-          servicePort: 9090
-  - host: zipkin.k8s.bosh.tokyo
-    http:
-      paths:
-      - backend:
-          serviceName: blog-zipkin-service
-          servicePort: 9411
-  - host: note.k8s.bosh.tokyo
-    http:
-      paths:
-      - backend:
-          serviceName: cms-service
-          servicePort: 8080
+#  - host: note.k8s.bosh.tokyo
+#    http:
+#      paths:
+#      - backend:
+#          serviceName: cms-service
+#          servicePort: 8080

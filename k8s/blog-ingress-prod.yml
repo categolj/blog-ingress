@@ -11,9 +11,6 @@ spec:
   - hosts:
     - blog.ik.am
     - blog-api.ik.am
-    - gateway.ik.am
-    - riff.ik.am
-    - prometheus.ik.am
     - zipkin.ik.am
     - note.ik.am
     # wget https://raw.githubusercontent.com/aws-quickstart/quickstart-pivotal-cloudfoundry/master/scripts/gen_ssl_certs.sh
@@ -34,24 +31,6 @@ spec:
       - backend:
           serviceName: blog-api-service
           servicePort: 8080
-  - host: gateway.ik.am
-    http:
-      paths:
-      - backend:
-          serviceName: blog-gateway-service
-          servicePort: 8080
-  - host: riff.ik.am
-    http:
-      paths:
-      - backend:
-          serviceName: blog-riff-http-gateway
-          servicePort: 80
-  - host: prometheus.ik.am
-    http:
-      paths:
-      - backend:
-          serviceName: blog-prometheus
-          servicePort: 9090
   - host: zipkin.ik.am
     http:
       paths:
